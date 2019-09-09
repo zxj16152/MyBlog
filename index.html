@@ -608,7 +608,9 @@
 <p>（8）确认redis进程是否启动，ps -ef | grep redis</p>
 <p>（9）让redis跟随系统启动自动启动</p>
 <p>在redis_6379脚本中，最上面，加入两行注释</p>
-<h1 id="chkconfig-2345-90-10"><a href="#chkconfig-2345-90-10" class="headerlink" title="chkconfig:   2345 90 10"></a>chkconfig:   2345 90 10</h1><h1 id="description-Redis-is-a-persistent-key-value-database"><a href="#description-Redis-is-a-persistent-key-value-database" class="headerlink" title="description:  Redis is a persistent key-value database"></a>description:  Redis is a persistent key-value database</h1><p>chkconfig redis_6379 on</p>
+<p>  #chkconfig:   2345 90 10</p>
+<p>   #description:  Redis is a persistent key-value database</p>
+<p>chkconfig redis_6379 on</p>
 <hr>
 <p>3、redis cli的使用</p>
 <p>redis-cli SHUTDOWN，连接本机的6379端口停止redis进程</p>
