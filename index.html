@@ -229,6 +229,383 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zxj16152.github.io/zhouxinjianBlog/zhouxinjianBlog/2019/09/18/Linux网络I:O模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/zhouxinjianBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/zhouxinjianBlog/2019/09/18/Linux网络I:O模型/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-18T10:04:01+08:00">
+                2019-09-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#Linux网络I/O模型</p>
+<ul>
+<li>阻塞I/O模型</li>
+<li>非阻塞I/O模型    recefrom 从应用层到内核的时候，如果该缓冲区没有数据就直接返回一个EWOULDBLOCK错误，一般都对非阻塞I/O模型进行轮询检查这个状态，看内核是不是有数据到来。</li>
+<li>I/O复用模型： Linux提供select/poll，进程通过将一个或多个fd 传递给select或poll系统调用，阻塞在select操作上，这样select/poll 可以侦测多个fd是否处于就绪状态。select/poll 是顺序扫描fd 是否就绪，而且支持的fd 数量有限，Linux还提供一个epoll 系统调用，epok 使用基于事件驱动方式代替顺序扫描，性能更高。当有fd 就绪时，就立即回调rollback 。</li>
+<li>信号驱动I/O模型：首先开启套接口信号驱动I/O功能，并通过系统调用sigaction执行一个信号处理函数（此系统调用立即返回，进程继续工作，它是非阻塞的）。当数据准备就绪时，就为该进程生成一个SIGIO信号，通过信号回调通知应用程序调用recefrom 来读取数据，并通知主循环函数处理数据。</li>
+<li>异步I/O：告知内核启动某个操作，并让内核在整个操作完成后（包括将数据从内核复制到用户自己的缓冲区）通知我们。这种模型于信号驱动模型的主要区别在于：信号驱动I/O由内核通知我们何时可以开始一个I/O操作；异步模型由内核通知我们I/O操作何时已经完成。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zxj16152.github.io/zhouxinjianBlog/zhouxinjianBlog/2019/09/16/hashmap-细节/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/zhouxinjianBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/zhouxinjianBlog/2019/09/16/hashmap-细节/" itemprop="url">hashmap 细节</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-16T17:38:14+08:00">
+                2019-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.hashmap 线程不安全HashMap的死链问题和扩容数据丢失<br>。在高并发场景下，新增对象容易丢失，原因如下：<br>并发赋值时被覆盖。<br>已遍历区间新增元素会丢失。<br>“新表”（table)被覆盖。<br>迁移丢失。在迁移过程中，有并发时，next 被提前置为null。</p>
+<p>ConcurrentHashMap。当某个槽内元素个数增加到超过8个且table的容量大于等于64时，由链表转红黑树。当某个槽内元素个数减少到6个时，由红黑树转回链表。<br>当元素容量小于64时，只会扩容，并不会把链表转为红黑树。<br>ConcurrentHashMap的size()方法只能返回一个大概数量，因为已经统计过的size()返回最终结果前可能又出现了变化。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zxj16152.github.io/zhouxinjianBlog/zhouxinjianBlog/2019/09/12/redis-相关/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/zhouxinjianBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/zhouxinjianBlog/2019/09/12/redis-相关/" itemprop="url">redis 相关</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-12T10:58:24+08:00">
+                2019-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="过期策略"><a href="#过期策略" class="headerlink" title="过期策略"></a>过期策略</h1><p>redis 会将每个设置了过期时间的key 放入一个独立的字典中，以后会定时来删除到期的key。除了定时删除外，还会使用惰性策略来删除过期的key，即客户端访问这个key时，redis<br>对key的过期时间进行检查，如果过期了就立即删除。定期删除是集中处理，惰性删除是零散处理。<br>定时扫描策略<br>Redis 默认每秒进行10次过期扫描，过期扫描不会遍历字典中所有的key。<br>1、从过期字典中随机20个key。<br>2、删除20个key中已经过期的key。<br>3、如果过期的key比率超过1/4，就重复1；<br>同时为了保证过期扫描不会出现循环过度导致线程卡死，算法还增加了扫描时间上限，默认不超过25ms。<br>当客户端请求到来时，服务器如果正好进入过期扫描状态，客户端的请求将会等待至少 25ms 后才会进行处理，如果客户端将超时时间设置的比较短，比如 10ms，那么就会出现大量的链接因为超时而关闭，业务端就会出现很多异常。而且这时你还无法从 Redis 的 slowlog 中看到慢查询记录，因为慢查询指的是逻辑处理过程慢，不包含等待时间。<br>所以业务开发人员一定要注意过期时间，如果有大批量的 key 过期，要给过期时间设置一个随机范围，而不宜全部在同一时间过期，分散过期处理的压力。<br>从库不会进行过期扫描，从库对过期的处理是被动的。主库在 key 到期时，会在 AOF 文件里增加一条 del 指令，同步到所有的从库，从库通过执行这条 del 指令来删除过期的 key。<br>从库的过期策略<br>因为指令同步是异步进行的，所以主库过期的 key 的 del 指令没有及时同步到从库的话，会出现主从数据的不一致，主库没有的数据在从库里还存在，比如上一节的集群环境分布式锁的算法漏洞就是因为这个同步延迟产生的。</p>
+<p>在生产环境中我们是不允许 Redis 出现交换行为的，为了限制最大使用内存，Redis 提供了配置参数 maxmemory 来限制内存超出期望大小。</p>
+<p>当实际内存超出 maxmemory 时，Redis 提供了几种可选策略 (maxmemory-policy) 来让用户自己决定该如何腾出新的空间以继续提供读写服务。</p>
+<p>noeviction 不会继续服务写请求 (DEL 请求可以继续服务)，读请求可以继续进行。这样可以保证不会丢失数据，但是会让线上的业务不能持续进行。这是默认的淘汰策略。</p>
+<p>volatile-lru 尝试淘汰设置了过期时间的 key，最少使用的 key 优先被淘汰。没有设置过期时间的 key 不会被淘汰，这样可以保证需要持久化的数据不会突然丢失。</p>
+<p>volatile-ttl 跟上面一样，除了淘汰的策略不是 LRU，而是 key 的剩余寿命 ttl 的值，ttl 越小越优先被淘汰。</p>
+<p>volatile-random 跟上面一样，不过淘汰的 key 是过期 key 集合中随机的 key。</p>
+<p>allkeys-lru 区别于 volatile-lru，这个策略要淘汰的 key 对象是全体的 key 集合，而不只是过期的 key 集合。这意味着没有设置过期时间的 key 也会被淘汰。</p>
+<p>allkeys-random 跟上面一样，不过淘汰的策略是随机的 key。</p>
+<p>volatile-xxx 策略只会针对带过期时间的 key 进行淘汰，allkeys-xxx 策略会对所有的 key 进行淘汰。如果你只是拿 Redis 做缓存，那应该使用 allkeys-xxx，客户端写缓存时不必携带过期时间。如果你还想同时使用 Redis 的持久化功能，那就使用 volatile-xxx 策略，这样可以保留没有设置过期时间的 key，它们是永久的 key 不会被 LRU 算法淘汰。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zxj16152.github.io/zhouxinjianBlog/zhouxinjianBlog/2019/09/07/亿级电商详情页系统实战/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -946,7 +1323,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/zhouxinjianBlog/2019/09/06/堆内存的分配/" itemprop="url">堆内存的分配</a></h1>
+                <a class="post-title-link" href="/zhouxinjianBlog/2019/09/06/堆内存的分配/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -998,14 +1375,28 @@
       
         
           
-            <p><strong>堆内存分配</strong></p>
-<p> 在类加载检查通过后，接下来虚拟机为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。</p>
+            <h1 id="堆内存分配"><a href="#堆内存分配" class="headerlink" title="堆内存分配"></a>堆内存分配</h1><hr>
+<p>title: 堆内存的分配<br>date: 2019-09-06 10:30:22</p>
+<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><p>在类加载检查通过后，接下来虚拟机为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。</p>
 <ol>
 <li>假设堆内存是规整的，用过的内存放这一边，空闲的放另一边。中间放着指针作为分界点的指示器，分配内存就仅仅把那个指针向空闲的那边挪动。这种分配方式称为“指针碰撞”。</li>
 <li>如果堆内存不规整，使用过的和空闲的内存交错，那就没办法进行指针碰撞，虚拟机就必须维护一个列表记录。记录哪些内存可用，分配的时候从列表中找到一块足够大的空间划分给对象实例。并更新表记录，这种分配方式称为“空闲列表”。</li>
 <li>选择哪种分配方式由Java堆是否规整决定，Java堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定。因此，在使用Serial、ParNew、等带有Compact过程的收集器时，系统采用分配算法是指针碰撞。而使用CMS这种基于Mark-Sweep算法的收集器时，采用空闲列表。</li>
 <li>创建对象可能是并发执行，修改指针指向位置，在并发情况下不是线程安全的，可能出现正在给A分配内存，指针还为来得及修改，B又同时使用了原来的指针来分配内存。有两种方案：<br>(1)、分配内存空间的动作进行同步处理，虚拟机采用CAS配上失败重试的方式保证更新操作的原子性；<br>(2)、把内存分配动作按照线程划分在不同的空间中进行，即每个线程在Java堆中预先分配一小块内存，称为本地线程分配缓冲（Thread Local Allocation Buffer,TLAB).哪个线程要分配内存就在哪个线程的TLAB上分配，只用TLAB用完并分配新的TLAB时才进行同步锁定。</li>
 </ol>
+<p>对象主要分配在新生代的Eden区，如果启动了本地线程分配缓冲，就按线程优先在TLAB上分配。少数情况下也可能直接分配在老年代，分配的细节取决于当前使用的哪种垃圾收集器组合，还有虚拟机与内存相关的参数设置。</p>
+<ol>
+<li>对象优先在新生代Eden区中分配，当Eden区没有足够空间进行分配时，虚拟机将发起一次MinorGC。</li>
+<li>大对象直接进入老年代</li>
+<li>长期存活的对象将进入老年代。</li>
+<li>动态对象年龄判定</li>
+<li>空间分配担保。在发生minorGC之前，虚拟机先检查老年代最大可用的连续空间是否大于新生代所有对象的总空间，如果这个条件成立，那么minorGC可以确保是安全的。如果不成立，虚拟机查看HandlePromotionFailure设置值是否允许担保失败。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试一次minorGC，如果小于，或者HandlePromotionFailure设置不允许，那就进行 Full GC。</li>
+</ol>
+<p>高性能硬件上部署程序，目前有两种方式：<br>（1）、通过64位JDK使用大内存。<br>（2）、使用若干32位虚拟机建立逻辑集群来利用硬件资源。<br>     可以给Java虚拟机分配超大堆的前提是有把握把应用程序的Full GC     频率控制得足够低，至少低到不会影响用户的使用。</p>
+<p>对象实例化：<br>1、确定类元信息是否存在。当JVM接收到new指令时，首先在metaspace内检测需要创建的类元信息是否存在，如果不存在，那么在双亲委派模式下，使用当前类加载器进行类加载，并生成对应的Class类对象。<br>2、分配对象内存。首先计算对象占用的空间大小，如果实例成员变量是引用变量，仅分配引用变量空间即可，即4个字节大小，接着在堆中划分一块内存给新对象。（采用CAS或TLAB）<br>3、设定默认值。成员变量值需要设定为默认值，即各种不同形式的零值。<br>4、设置对象头。设置对象的哈希码、GC信息、锁信息、对象所属的类元信息等。<br>5、执行init方法。初始化成员变量，执行实例代码块，调用类的构造方法，并把堆内对象的首地址赋值给引用变量。</p>
+<p>①init和clinit方法执行时机不同</p>
+<p>init是对象构造器方法，也就是说在程序执行 new 一个对象调用该对象类的 constructor 方法时才会执行init方法，而clinit是类构造器方法，也就是在jvm进行类加载—–验证—-解析—–初始化，中的初始化阶段jvm会调用clinit方法。<br>①init和clinit方法执行时机不同</p>
+<p>init是对象构造器方法，也就是说在程序执行 new 一个对象调用该对象类的 constructor 方法时才会执行init方法，而clinit是类构造器方法，也就是在jvm进行类加载—–验证—-解析—–初始化，中的初始化阶段jvm会调用clinit方法。<br>注意，接口中也有<clinit>方法，但实现类初始化或子类接口执行<clinit>方法时，不会执行父接口的<clinit>。而是要等到父接口定义变量使用时才会调用clinit。</clinit></clinit></clinit></p>
 
           
         
@@ -1340,7 +1731,7 @@
               
                 <a href="/zhouxinjianBlog/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

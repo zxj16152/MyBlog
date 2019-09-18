@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="堆内存分配  在类加载检查通过后，接下来虚拟机为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。  假设堆内存是规整的，用过的内存放这一边，空闲的放另一边。中间放着指针作为分界点的指示器，分配内存就仅仅把那个指针向空闲的那边挪动。这种分配方式称为“指针碰撞”。 如果堆内存不规整，使用过的和空闲的内存交错，那就没办法进行指针碰撞，虚拟机就必须维护一个列表记录。记录哪些内存可用，分配的">
+<meta name="description" content="堆内存分配 title: 堆内存的分配date: 2019-09-06 10:30:22 tags:在类加载检查通过后，接下来虚拟机为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。  假设堆内存是规整的，用过的内存放这一边，空闲的放另一边。中间放着指针作为分界点的指示器，分配内存就仅仅把那个指针向空闲的那边挪动。这种分配方式称为“指针碰撞”。 如果堆内存不规整，使用过的和空闲的内">
 <meta property="og:type" content="article">
-<meta property="og:title" content="堆内存的分配">
+<meta property="og:title" content="Hexo">
 <meta property="og:url" content="https://zxj16152.github.io/zhouxinjianBlog/2019/09/06/堆内存的分配/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="堆内存分配  在类加载检查通过后，接下来虚拟机为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。  假设堆内存是规整的，用过的内存放这一边，空闲的放另一边。中间放着指针作为分界点的指示器，分配内存就仅仅把那个指针向空闲的那边挪动。这种分配方式称为“指针碰撞”。 如果堆内存不规整，使用过的和空闲的内存交错，那就没办法进行指针碰撞，虚拟机就必须维护一个列表记录。记录哪些内存可用，分配的">
+<meta property="og:description" content="堆内存分配 title: 堆内存的分配date: 2019-09-06 10:30:22 tags:在类加载检查通过后，接下来虚拟机为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。  假设堆内存是规整的，用过的内存放这一边，空闲的放另一边。中间放着指针作为分界点的指示器，分配内存就仅仅把那个指针向空闲的那边挪动。这种分配方式称为“指针碰撞”。 如果堆内存不规整，使用过的和空闲的内">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-06T02:32:11.794Z">
+<meta property="og:updated_time" content="2019-09-16T09:42:53.105Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="堆内存的分配">
-<meta name="twitter:description" content="堆内存分配  在类加载检查通过后，接下来虚拟机为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。  假设堆内存是规整的，用过的内存放这一边，空闲的放另一边。中间放着指针作为分界点的指示器，分配内存就仅仅把那个指针向空闲的那边挪动。这种分配方式称为“指针碰撞”。 如果堆内存不规整，使用过的和空闲的内存交错，那就没办法进行指针碰撞，虚拟机就必须维护一个列表记录。记录哪些内存可用，分配的">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="堆内存分配 title: 堆内存的分配date: 2019-09-06 10:30:22 tags:在类加载检查通过后，接下来虚拟机为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。  假设堆内存是规整的，用过的内存放这一边，空闲的放另一边。中间放着指针作为分界点的指示器，分配内存就仅仅把那个指针向空闲的那边挪动。这种分配方式称为“指针碰撞”。 如果堆内存不规整，使用过的和空闲的内">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title>堆内存的分配 | Hexo</title>
+  <title> | Hexo</title>
   
 
 
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">堆内存的分配</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -299,14 +299,28 @@
       
 
       
-        <p><strong>堆内存分配</strong></p>
-<p> 在类加载检查通过后，接下来虚拟机为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。</p>
+        <h1 id="堆内存分配"><a href="#堆内存分配" class="headerlink" title="堆内存分配"></a>堆内存分配</h1><hr>
+<p>title: 堆内存的分配<br>date: 2019-09-06 10:30:22</p>
+<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><p>在类加载检查通过后，接下来虚拟机为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。</p>
 <ol>
 <li>假设堆内存是规整的，用过的内存放这一边，空闲的放另一边。中间放着指针作为分界点的指示器，分配内存就仅仅把那个指针向空闲的那边挪动。这种分配方式称为“指针碰撞”。</li>
 <li>如果堆内存不规整，使用过的和空闲的内存交错，那就没办法进行指针碰撞，虚拟机就必须维护一个列表记录。记录哪些内存可用，分配的时候从列表中找到一块足够大的空间划分给对象实例。并更新表记录，这种分配方式称为“空闲列表”。</li>
 <li>选择哪种分配方式由Java堆是否规整决定，Java堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定。因此，在使用Serial、ParNew、等带有Compact过程的收集器时，系统采用分配算法是指针碰撞。而使用CMS这种基于Mark-Sweep算法的收集器时，采用空闲列表。</li>
 <li>创建对象可能是并发执行，修改指针指向位置，在并发情况下不是线程安全的，可能出现正在给A分配内存，指针还为来得及修改，B又同时使用了原来的指针来分配内存。有两种方案：<br>(1)、分配内存空间的动作进行同步处理，虚拟机采用CAS配上失败重试的方式保证更新操作的原子性；<br>(2)、把内存分配动作按照线程划分在不同的空间中进行，即每个线程在Java堆中预先分配一小块内存，称为本地线程分配缓冲（Thread Local Allocation Buffer,TLAB).哪个线程要分配内存就在哪个线程的TLAB上分配，只用TLAB用完并分配新的TLAB时才进行同步锁定。</li>
 </ol>
+<p>对象主要分配在新生代的Eden区，如果启动了本地线程分配缓冲，就按线程优先在TLAB上分配。少数情况下也可能直接分配在老年代，分配的细节取决于当前使用的哪种垃圾收集器组合，还有虚拟机与内存相关的参数设置。</p>
+<ol>
+<li>对象优先在新生代Eden区中分配，当Eden区没有足够空间进行分配时，虚拟机将发起一次MinorGC。</li>
+<li>大对象直接进入老年代</li>
+<li>长期存活的对象将进入老年代。</li>
+<li>动态对象年龄判定</li>
+<li>空间分配担保。在发生minorGC之前，虚拟机先检查老年代最大可用的连续空间是否大于新生代所有对象的总空间，如果这个条件成立，那么minorGC可以确保是安全的。如果不成立，虚拟机查看HandlePromotionFailure设置值是否允许担保失败。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试一次minorGC，如果小于，或者HandlePromotionFailure设置不允许，那就进行 Full GC。</li>
+</ol>
+<p>高性能硬件上部署程序，目前有两种方式：<br>（1）、通过64位JDK使用大内存。<br>（2）、使用若干32位虚拟机建立逻辑集群来利用硬件资源。<br>     可以给Java虚拟机分配超大堆的前提是有把握把应用程序的Full GC     频率控制得足够低，至少低到不会影响用户的使用。</p>
+<p>对象实例化：<br>1、确定类元信息是否存在。当JVM接收到new指令时，首先在metaspace内检测需要创建的类元信息是否存在，如果不存在，那么在双亲委派模式下，使用当前类加载器进行类加载，并生成对应的Class类对象。<br>2、分配对象内存。首先计算对象占用的空间大小，如果实例成员变量是引用变量，仅分配引用变量空间即可，即4个字节大小，接着在堆中划分一块内存给新对象。（采用CAS或TLAB）<br>3、设定默认值。成员变量值需要设定为默认值，即各种不同形式的零值。<br>4、设置对象头。设置对象的哈希码、GC信息、锁信息、对象所属的类元信息等。<br>5、执行init方法。初始化成员变量，执行实例代码块，调用类的构造方法，并把堆内对象的首地址赋值给引用变量。</p>
+<p>①init和clinit方法执行时机不同</p>
+<p>init是对象构造器方法，也就是说在程序执行 new 一个对象调用该对象类的 constructor 方法时才会执行init方法，而clinit是类构造器方法，也就是在jvm进行类加载—–验证—-解析—–初始化，中的初始化阶段jvm会调用clinit方法。<br>①init和clinit方法执行时机不同</p>
+<p>init是对象构造器方法，也就是说在程序执行 new 一个对象调用该对象类的 constructor 方法时才会执行init方法，而clinit是类构造器方法，也就是在jvm进行类加载—–验证—-解析—–初始化，中的初始化阶段jvm会调用clinit方法。<br>注意，接口中也有<clinit>方法，但实现类初始化或子类接口执行<clinit>方法时，不会执行父接口的<clinit>。而是要等到父接口定义变量使用时才会调用clinit。</clinit></clinit></clinit></p>
 
       
     </div>
@@ -395,8 +409,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -411,7 +434,7 @@
               
                 <a href="/zhouxinjianBlog/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -438,6 +461,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#堆内存分配"><span class="nav-number">1.</span> <span class="nav-text">堆内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags"><span class="nav-number">1.1.</span> <span class="nav-text">tags:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

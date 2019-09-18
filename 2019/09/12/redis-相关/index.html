@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="过期策略redis 会将每个设置了过期时间的key 放入一个独立的字典中，以后会定时来删除到期的key。除了定时删除外，还会使用惰性策略来删除过期的key，即客户端访问这个key时，redis对key的过期时间进行检查，如果过期了就立即删除。定期删除是集中处理，惰性删除是零散处理。定时扫描策略Redis 默认每秒进行10次过期扫描，过期扫描不会遍历字典中所有的key。1、从过期字典中随机20个ke">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://zxj16152.github.io/zhouxinjianBlog/2019/09/05/hello-world/index.html">
+<meta property="og:title" content="redis 相关">
+<meta property="og:url" content="https://zxj16152.github.io/zhouxinjianBlog/2019/09/12/redis-相关/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="过期策略redis 会将每个设置了过期时间的key 放入一个独立的字典中，以后会定时来删除到期的key。除了定时删除外，还会使用惰性策略来删除过期的key，即客户端访问这个key时，redis对key的过期时间进行检查，如果过期了就立即删除。定期删除是集中处理，惰性删除是零散处理。定时扫描策略Redis 默认每秒进行10次过期扫描，过期扫描不会遍历字典中所有的key。1、从过期字典中随机20个ke">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-05T09:02:02.618Z">
+<meta property="og:updated_time" content="2019-09-12T03:23:12.458Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="redis 相关">
+<meta name="twitter:description" content="过期策略redis 会将每个设置了过期时间的key 放入一个独立的字典中，以后会定时来删除到期的key。除了定时删除外，还会使用惰性策略来删除过期的key，即客户端访问这个key时，redis对key的过期时间进行检查，如果过期了就立即删除。定期删除是集中处理，惰性删除是零散处理。定时扫描策略Redis 默认每秒进行10次过期扫描，过期扫描不会遍历字典中所有的key。1、从过期字典中随机20个ke">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://zxj16152.github.io/zhouxinjianBlog/2019/09/05/hello-world/">
+  <link rel="canonical" href="https://zxj16152.github.io/zhouxinjianBlog/2019/09/12/redis-相关/">
 
 
 
 
 
-  <title>Hello World | Hexo</title>
+  <title>redis 相关 | Hexo</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zxj16152.github.io/zhouxinjianBlog/zhouxinjianBlog/2019/09/05/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://zxj16152.github.io/zhouxinjianBlog/zhouxinjianBlog/2019/09/12/redis-相关/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">redis 相关</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-05T16:22:54+08:00">
-                2019-09-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-12T10:58:24+08:00">
+                2019-09-12
               </time>
             
 
@@ -299,19 +299,16 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="过期策略"><a href="#过期策略" class="headerlink" title="过期策略"></a>过期策略</h1><p>redis 会将每个设置了过期时间的key 放入一个独立的字典中，以后会定时来删除到期的key。除了定时删除外，还会使用惰性策略来删除过期的key，即客户端访问这个key时，redis<br>对key的过期时间进行检查，如果过期了就立即删除。定期删除是集中处理，惰性删除是零散处理。<br>定时扫描策略<br>Redis 默认每秒进行10次过期扫描，过期扫描不会遍历字典中所有的key。<br>1、从过期字典中随机20个key。<br>2、删除20个key中已经过期的key。<br>3、如果过期的key比率超过1/4，就重复1；<br>同时为了保证过期扫描不会出现循环过度导致线程卡死，算法还增加了扫描时间上限，默认不超过25ms。<br>当客户端请求到来时，服务器如果正好进入过期扫描状态，客户端的请求将会等待至少 25ms 后才会进行处理，如果客户端将超时时间设置的比较短，比如 10ms，那么就会出现大量的链接因为超时而关闭，业务端就会出现很多异常。而且这时你还无法从 Redis 的 slowlog 中看到慢查询记录，因为慢查询指的是逻辑处理过程慢，不包含等待时间。<br>所以业务开发人员一定要注意过期时间，如果有大批量的 key 过期，要给过期时间设置一个随机范围，而不宜全部在同一时间过期，分散过期处理的压力。<br>从库不会进行过期扫描，从库对过期的处理是被动的。主库在 key 到期时，会在 AOF 文件里增加一条 del 指令，同步到所有的从库，从库通过执行这条 del 指令来删除过期的 key。<br>从库的过期策略<br>因为指令同步是异步进行的，所以主库过期的 key 的 del 指令没有及时同步到从库的话，会出现主从数据的不一致，主库没有的数据在从库里还存在，比如上一节的集群环境分布式锁的算法漏洞就是因为这个同步延迟产生的。</p>
+<p>在生产环境中我们是不允许 Redis 出现交换行为的，为了限制最大使用内存，Redis 提供了配置参数 maxmemory 来限制内存超出期望大小。</p>
+<p>当实际内存超出 maxmemory 时，Redis 提供了几种可选策略 (maxmemory-policy) 来让用户自己决定该如何腾出新的空间以继续提供读写服务。</p>
+<p>noeviction 不会继续服务写请求 (DEL 请求可以继续服务)，读请求可以继续进行。这样可以保证不会丢失数据，但是会让线上的业务不能持续进行。这是默认的淘汰策略。</p>
+<p>volatile-lru 尝试淘汰设置了过期时间的 key，最少使用的 key 优先被淘汰。没有设置过期时间的 key 不会被淘汰，这样可以保证需要持久化的数据不会突然丢失。</p>
+<p>volatile-ttl 跟上面一样，除了淘汰的策略不是 LRU，而是 key 的剩余寿命 ttl 的值，ttl 越小越优先被淘汰。</p>
+<p>volatile-random 跟上面一样，不过淘汰的 key 是过期 key 集合中随机的 key。</p>
+<p>allkeys-lru 区别于 volatile-lru，这个策略要淘汰的 key 对象是全体的 key 集合，而不只是过期的 key 集合。这意味着没有设置过期时间的 key 也会被淘汰。</p>
+<p>allkeys-random 跟上面一样，不过淘汰的策略是随机的 key。</p>
+<p>volatile-xxx 策略只会针对带过期时间的 key 进行淘汰，allkeys-xxx 策略会对所有的 key 进行淘汰。如果你只是拿 Redis 做缓存，那应该使用 allkeys-xxx，客户端写缓存时不必携带过期时间。如果你还想同时使用 Redis 的持久化功能，那就使用 volatile-xxx 策略，这样可以保留没有设置过期时间的 key，它们是永久的 key 不会被 LRU 算法淘汰。</p>
 
       
     </div>
@@ -336,14 +333,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/zhouxinjianBlog/2019/09/07/亿级电商详情页系统实战/" rel="next" title="亿级电商详情页系统实战">
+                <i class="fa fa-chevron-left"></i> 亿级电商详情页系统实战
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/zhouxinjianBlog/2019/09/05/我的第一篇博客/" rel="prev" title="我的第一篇博客">
-                我的第一篇博客 <i class="fa fa-chevron-right"></i>
+              <a href="/zhouxinjianBlog/2019/09/16/hashmap-细节/" rel="prev" title="hashmap 细节">
+                hashmap 细节 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -458,7 +459,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#过期策略"><span class="nav-number">1.</span> <span class="nav-text">过期策略</span></a></li></ol></div>
             
 
           </div>
